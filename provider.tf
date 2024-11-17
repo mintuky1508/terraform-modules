@@ -1,12 +1,12 @@
-variable "ami_id" {
-  description = "ami_id for ec2"
-  type        = string
-  default     = "ami-005fc0f236362e99f"
-
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
 }
-variable "instance_type" {
-  description = "instance-type"
-  type        = string
-  default     = "t2.micro"
 
+provider "aws" {
+  region = "us-east-1"
 }

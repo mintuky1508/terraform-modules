@@ -1,12 +1,26 @@
 
-module "ec2_instance" {
-  source        = "./modules/ec2"
-  ami_id        = "ami-005fc0f236362e99f"
-  instance_type = "t2.micro"
-  key_name      = "cicd"
-  instance_name = "myserver"
+# module "ec2_instance" {
+#   source        = "git::https://github.com/mintuky1508/terraform-modules.git//modules/ec2"
+#   ami_id        = var.ami_ids
+#   instance_type = var.ec2_instance_type
+#   key_name      = "cicd"
+#   instance_name = var.instance_name
+# }
+
+# module "s3" {
+#   source = "git::https://github.com/mintuky1508/terraform-modules.git//modules/s3"
+#   name = var.mybuckettttb
+# }
+
+module "vpc" {
+  source   = "./modules/vpc"
+  vpc_name = "my-vpc"
 }
 
-module "s3" {
-  source = "./modules/s3"
+module "subnet" {
+  source                  = "./modules/subnet"
+  vpc_id                  = module.vpc.vpc_id
+  subnet_name             = "my-subnet"
+  subnet_cidr             = "10.0.1.0/24"
+  map_public_ip_on_launch = true
 }
