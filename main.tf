@@ -1,16 +1,15 @@
 
-# module "ec2_instance" {
-#   source        = "git::https://github.com/mintuky1508/terraform-modules.git//modules/ec2"
-#   ami_id        = var.ami_ids
-#   instance_type = var.ec2_instance_type
-#   key_name      = "cicd"
-#   instance_name = var.instance_name
-# }
+module "ec2_instance" {
+  source        = "./modules/ec2"
+  ami_id        = var.ami_ids
+  instance_type = var.ec2_instance_type
+  key_name      = "cicd"
+  instance_name = var.instance_name
+}
 
-# module "s3" {
-#   source = "git::https://github.com/mintuky1508/terraform-modules.git//modules/s3"
-#   name = var.mybuckettttb
-# }
+module "s3" {
+  source = "./modules/s3"
+}
 
 module "vpc" {
   source   = "./modules/vpc"
